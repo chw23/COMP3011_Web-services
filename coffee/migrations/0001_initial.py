@@ -50,8 +50,8 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, null=True)),
                 ('is_public', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('bean', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='recipes', to='api.bean')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='recipes', to='api.user')),
+                ('bean', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='recipes', to='coffee.bean')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='recipes', to='coffee.user')),
             ],
             options={
                 'db_table': 'recipes',
@@ -66,8 +66,8 @@ class Migration(migrations.Migration):
                 ('rating', models.IntegerField(blank=True, null=True)),
                 ('notes', models.TextField(blank=True, null=True)),
                 ('brewed_at', models.DateTimeField(auto_now_add=True)),
-                ('recipe', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='brews', to='api.recipe')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='brews', to='api.user')),
+                ('recipe', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='brews', to='coffee.recipe')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='brews', to='coffee.user')),
             ],
             options={
                 'db_table': 'brews',
@@ -80,8 +80,8 @@ class Migration(migrations.Migration):
                 ('rating', models.IntegerField()),
                 ('comment', models.TextField(blank=True, null=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='api.recipe')),
-                ('reviewer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='api.user')),
+                ('recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='coffee.recipe')),
+                ('reviewer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='coffee.user')),
             ],
             options={
                 'db_table': 'reviews',
@@ -93,8 +93,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='favourited_by', to='api.recipe')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='favourites', to='api.user')),
+                ('recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='favourited_by', to='coffee.recipe')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='favourites', to='coffee.user')),
             ],
             options={
                 'db_table': 'favourites',
