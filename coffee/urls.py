@@ -1,18 +1,32 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 from .views import (
-    UserViewSet, BeanViewSet, RecipeViewSet,
-    BrewViewSet, ReviewViewSet, FavouriteViewSet,
+    UserCreateView,
+    LoginView,
+    LogoutView,
+    BeanListView,
+    BeanDetailView,
+    RecipeListCreateView,
+    RecipeDetailView,
+    RecipeReviewView,
+    UserFavouriteView,
+    UserFavouriteDetailView,
+    UserPreferencesView,
+    RecommendationView,
+    BrewPartialUpdateView,
 )
 
-router = DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'beans', BeanViewSet)
-router.register(r'recipes', RecipeViewSet)
-router.register(r'brews', BrewViewSet)
-router.register(r'reviews', ReviewViewSet)
-router.register(r'favourites', FavouriteViewSet)
-
 urlpatterns = [
-    path('', include(router.urls)),
+    path('users', UserCreateView.as_view()),
+    path('auth/login', LoginView.as_view()),
+    path('auth/logout', LogoutView.as_view()),
+    path('beans', BeanListView.as_view()),
+    path('beans/<int:bean_id>', BeanDetailView.as_view()),
+    path('recipes', RecipeListCreateView.as_view()),
+    path('recipes/<int:recipe_id>', RecipeDetailView.as_view()),
+    path('recipes/<int:recipe_id>/reviews', RecipeReviewView.as_view()),
+    path('users/<int:user_id>/favourites', UserFavouriteView.as_view()),
+    path('users/<int:user_id>/favourites/<int:recipe_id>', UserFavouriteDetailView.as_view()),
+    path('users/<int:user_id>/preferences', UserPreferencesView.as_view()),
+    path('recommendations', RecommendationView.as_view()),
+    path('brews/<int:brew_id>', BrewPartialUpdateView.as_view()),
 ]

@@ -1,12 +1,25 @@
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
 from .models import User, Bean, Recipe, Brew, Review, Favourite
 
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True)
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password_hash', 'created_at']
-        extra_kwargs = {'password_hash': {'write_only': True}}
+        fields = ['id', 'username', 'email', 'password', 'created_at']
+
+    def create(self, validated_data):
+        raw_password = validated_data.pop('password')
+        validated_data['password_hash'] = make_password(raw_password)
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        raw_password = validated_data.pop('password', None)
+        if raw_password:
+            instance.password_hash = make_password(raw_password)
+        return super().update(instance, validated_data)
 
 
 class BeanSerializer(serializers.ModelSerializer):
