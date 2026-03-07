@@ -86,6 +86,14 @@ def frontend_analytics(request):
 
 @api_view(['POST'])
 def auth_register(request):
+    """
+    Register a new user account and return a bearer token.
+
+    Request body:
+    - username
+    - email
+    - password
+    """
     username = request.data.get('username', '').strip()
     email = request.data.get('email', '').strip()
     password = request.data.get('password', '')
@@ -115,6 +123,12 @@ def auth_register(request):
 
 @api_view(['POST'])
 def auth_login(request):
+    """
+    Authenticate with username/email and password, then return a bearer token.
+
+    Supports legacy plaintext password hashes and upgrades them to Django hashes
+    after a successful login.
+    """
     username_or_email = request.data.get('username', '').strip()
     password = request.data.get('password', '')
 
@@ -140,6 +154,9 @@ def auth_login(request):
 
 @api_view(['GET'])
 def auth_me(request):
+    """
+    Return the currently authenticated user based on bearer token.
+    """
     user = _get_authenticated_user(request)
     if not user:
         return Response({'detail': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -148,6 +165,9 @@ def auth_me(request):
 
 @api_view(['POST'])
 def auth_logout(request):
+    """
+    Invalidate the current bearer token.
+    """
     token = _get_auth_token(request)
     if not token:
         return Response({'detail': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -464,6 +484,14 @@ class FavouriteViewSet(viewsets.ModelViewSet):
 
 @api_view(['GET'])
 def analytics_summary(request):
+    """
+    Return aggregate analytics for public coffee activity.
+
+    Includes:
+    - popular brew methods
+    - average ratings by bean origin
+    - most favourited public recipes
+    """
     popular_methods = (
         Recipe.objects.filter(is_public=True)
         .exclude(method__isnull=True)
