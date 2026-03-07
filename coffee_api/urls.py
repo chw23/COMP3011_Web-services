@@ -16,6 +16,39 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+
+
+def _get_docs_urlpatterns():
+    try:
+        from rest_framework.documentation import include_docs_urls
+
+        return [
+            path(
+                'docs/',
+                include_docs_urls(
+                    title='Coffee API',
+                    description='API documentation for the Coffee Review service.',
+                    public=False,
+                ),
+            ),
+        ]
+    except Exception as exc:
+        return [
+            path(
+                'docs/',
+                lambda request, error=str(exc): HttpResponse(
+                    (
+                        'CoreAPI docs are unavailable in the current runtime. '
+                        'This usually happens with Python 3.13+ because coreapi '
+                        'depends on removed stdlib modules. '
+                        f'Underlying error: {error}'
+                    ),
+                    status=501,
+                    content_type='text/plain',
+                ),
+            ),
+        ]
 from coffee.views import (
     frontend_home,
     frontend_auth,
@@ -43,3 +76,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('coffee.urls')),
 ]
+
+urlpatterns += _get_docs_urlpatterns()
