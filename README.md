@@ -74,6 +74,8 @@ python manage.py runserver
 ### API docs
 
 - `/docs/`
+- Detailed project documentation PDF: [docs/API_Documentation.pdf](docs/API_Documentation.pdf)
+- Markdown source: [docs/API_Documentation.md](docs/API_Documentation.md)
 
 If the runtime cannot load CoreAPI, `/docs/` returns a `501` response with a compatibility message.
 
