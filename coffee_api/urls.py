@@ -49,8 +49,30 @@ def _get_docs_urlpatterns():
                 ),
             ),
         ]
+from coffee.views import (
+    frontend_home,
+    frontend_auth,
+    frontend_register,
+    frontend_user_profile,
+    frontend_beans,
+    frontend_recipes,
+    frontend_recipe_detail,
+    frontend_create_recipe,
+    frontend_log_brew,
+    frontend_analytics,
+)
 
 urlpatterns = [
+    path('', frontend_home, name='frontend-home'),
+    path('auth/', frontend_auth, name='frontend-auth'),
+    path('auth/register/', frontend_register, name='frontend-register'),
+    path('users/me/', frontend_user_profile, name='frontend-user-profile'),
+    path('beans/', frontend_beans, name='frontend-beans'),
+    path('recipes/', frontend_recipes, name='frontend-recipes'),
+    path('recipes/<int:recipe_id>/', frontend_recipe_detail, name='frontend-recipe-detail'),
+    path('recipes/create/', frontend_create_recipe, name='frontend-create-recipe'),
+    path('brews/log/', frontend_log_brew, name='frontend-log-brew'),
+    path('analytics/', frontend_analytics, name='frontend-analytics'),
     path('admin/', admin.site.urls),
     path('api/', include('coffee.urls')),
 ]

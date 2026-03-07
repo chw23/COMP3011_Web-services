@@ -1,0 +1,17 @@
+{% extends 'coffee/base.html' %}
+
+{% block page_id %}user{% endblock %}
+
+{% block content %}
+<section class="panel active">
+  <h2>User Profile</h2>
+
+  <article class="card" id="user-profile-card">
+    <h3>Account Details</h3>
+    <div id="user-profile-details"></div>
+  </article>
+
+  <h3>Favourited Recipes</h3>
+  <div id="user-favourites-list" class="grid"></div>
+</section>
+{% endblock %}
