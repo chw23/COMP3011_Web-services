@@ -96,3 +96,15 @@ class Favourite(models.Model):
 
     def __str__(self):
         return f"Favourite: User {self.user_id} -> Recipe {self.recipe_id}"
+
+
+class UserToken(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='auth_token')
+    token = models.CharField(max_length=128, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'user_tokens'
+
+    def __str__(self):
+        return f"Token for user {self.user_id}"

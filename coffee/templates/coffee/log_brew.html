@@ -1,0 +1,37 @@
+{% extends 'coffee/base.html' %}
+
+{% block page_id %}brew{% endblock %}
+
+{% block content %}
+<section class="panel active">
+  <h2>Log a Brew</h2>
+  <form id="log-brew-form" class="form-grid">
+    <select id="brew-recipe" required></select>
+    <input id="brew-actual-temp" type="number" placeholder="Actual Temp" required />
+    <input id="brew-actual-time" type="number" placeholder="Actual Time (seconds)" required />
+    <input id="brew-rating" type="number" min="1" max="5" placeholder="Rating 1-5" required />
+    <textarea id="brew-notes" placeholder="Notes"></textarea>
+    <button type="submit">Log Brew</button>
+  </form>
+  <p id="log-brew-message" class="message"></p>
+
+  <h3>Your Brew Logs</h3>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Recipe</th>
+          <th>Created At</th>
+          <th>Actual Temp</th>
+          <th>Actual Time (sec)</th>
+          <th>Rating</th>
+          <th>Notes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="brew-log-list"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

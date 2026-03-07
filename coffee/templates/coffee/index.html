@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee API Frontend</title>
+  <link rel="stylesheet" href="{% static 'coffee/app.css' %}">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Coffee App Frontend</h1>
+    <div class="user-select">
+      <label for="active-user">Active User</label>
+      <select id="active-user"></select>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="beans">Bean Explorer</button>
+    <button class="tab" data-tab="feed">Public Recipe Feed</button>
+    <button class="tab" data-tab="create">Create Recipe</button>
+    <button class="tab" data-tab="brew">Log Brew</button>
+    <button class="tab" data-tab="analytics">Analytics</button>
+  </nav>
+
+  <main>
+    <section id="beans" class="panel active">
+      <h2>Bean Explorer</h2>
+      <div class="filters">
+        <select id="origin-filter"><option value="">All Origins</option></select>
+        <select id="roast-filter"><option value="">All Roast Levels</option></select>
+        <button id="apply-bean-filter">Apply Filters</button>
+      </div>
+      <div id="bean-list" class="grid"></div>
+    </section>
+
+    <section id="feed" class="panel">
+      <h2>Public Recipe Feed</h2>
+      <div id="recipe-feed" class="grid"></div>
+    </section>
+
+    <section id="detail" class="panel">
+      <h2>Recipe Detail</h2>
+      <div id="recipe-detail"></div>
+    </section>
+
+    <section id="create" class="panel">
+      <h2>Create a Recipe</h2>
+      <form id="create-recipe-form" class="form-grid">
+        <input id="recipe-method" placeholder="Method (e.g. V60)" required />
+        <input id="recipe-water-temp" type="number" placeholder="Water Temp" required />
+        <input id="recipe-grind-size" placeholder="Grind Size" required />
+        <input id="recipe-brew-time" type="number" placeholder="Brew Time (seconds)" required />
+        <select id="recipe-bean" required></select>
+        <textarea id="recipe-description" placeholder="Description"></textarea>
+        <label><input id="recipe-public" type="checkbox" checked /> Public</label>
+        <button type="submit">Create Recipe</button>
+      </form>
+      <p id="create-recipe-message" class="message"></p>
+    </section>
+
+    <section id="brew" class="panel">
+      <h2>Log a Brew</h2>
+      <form id="log-brew-form" class="form-grid">
+        <select id="brew-recipe" required></select>
+        <input id="brew-actual-temp" type="number" placeholder="Actual Temp" required />
+        <input id="brew-actual-time" type="number" placeholder="Actual Time (seconds)" required />
+        <input id="brew-rating" type="number" min="1" max="5" placeholder="Rating 1-5" required />
+        <textarea id="brew-notes" placeholder="Notes"></textarea>
+        <button type="submit">Log Brew</button>
+      </form>
+      <p id="log-brew-message" class="message"></p>
+    </section>
+
+    <section id="analytics" class="panel">
+      <h2>Analytics / Stats</h2>
+      <div class="stats-grid">
+        <div>
+          <h3>Most Popular Brew Methods</h3>
+          <div id="popular-methods"></div>
+        </div>
+        <div>
+          <h3>Average Ratings by Bean Origin</h3>
+          <div id="ratings-by-origin"></div>
+        </div>
+        <div>
+          <h3>Most Favourited Recipes</h3>
+          <ul id="most-favourited"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="{% static 'coffee/app.js' %}"></script>
+</body>
+</html>

@@ -16,11 +16,15 @@ class BeanSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(serializers.ModelSerializer):
+    bean_name = serializers.CharField(source='bean.name', read_only=True)
+    bean_origin = serializers.CharField(source='bean.origin', read_only=True)
+
     class Meta:
         model = Recipe
         fields = [
             'id', 'user', 'bean', 'method', 'water_temp',
-            'grind_size', 'brew_time', 'description', 'is_public', 'created_at'
+            'grind_size', 'brew_time', 'description', 'is_public', 'created_at',
+            'bean_name', 'bean_origin'
         ]
 
 

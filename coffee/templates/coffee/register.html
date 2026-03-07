@@ -1,0 +1,22 @@
+{% extends 'coffee/base.html' %}
+
+{% block page_id %}register{% endblock %}
+
+{% block content %}
+<section class="panel active auth-page">
+  <h2>Create Account</h2>
+  <div class="auth-wrapper">
+    <article class="card auth-card">
+      <h3>Register</h3>
+      <form id="register-form" class="form-grid">
+        <input id="register-username" placeholder="Username" required />
+        <input id="register-email" type="email" placeholder="Email" required />
+        <input id="register-password" type="password" placeholder="Password" required />
+        <button type="submit">Create Account</button>
+      </form>
+      <p class="auth-helper">Already have an account? <a href="/auth/">Login here</a></p>
+      <p id="register-message" class="message"></p>
+    </article>
+  </div>
+</section>
+{% endblock %}

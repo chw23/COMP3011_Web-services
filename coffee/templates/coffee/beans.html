@@ -1,0 +1,15 @@
+{% extends 'coffee/base.html' %}
+
+{% block page_id %}beans{% endblock %}
+
+{% block content %}
+<section class="panel active">
+  <h2>Bean Explorer</h2>
+  <div class="filters">
+    <select id="origin-filter"><option value="">All Origins</option></select>
+    <select id="roast-filter"><option value="">All Roast Levels</option></select>
+    <button id="apply-bean-filter">Apply Filters</button>
+  </div>
+  <div id="bean-list" class="grid"></div>
+</section>
+{% endblock %}
