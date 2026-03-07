@@ -1,0 +1,20 @@
+{% extends 'coffee/base.html' %}
+
+{% block page_id %}create{% endblock %}
+
+{% block content %}
+<section class="panel active">
+  <h2>Create a Recipe</h2>
+  <form id="create-recipe-form" class="form-grid">
+    <input id="recipe-method" placeholder="Method (e.g. V60)" required />
+    <input id="recipe-water-temp" type="number" placeholder="Water Temp" required />
+    <input id="recipe-grind-size" placeholder="Grind Size" required />
+    <input id="recipe-brew-time" type="number" placeholder="Brew Time (seconds)" required />
+    <select id="recipe-bean" required></select>
+    <textarea id="recipe-description" placeholder="Description"></textarea>
+    <label><input id="recipe-public" type="checkbox" checked /> Public</label>
+    <button type="submit">Create Recipe</button>
+  </form>
+  <p id="create-recipe-message" class="message"></p>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'coffee/base.html' %}
+
+{% block page_id %}analytics{% endblock %}
+
+{% block content %}
+<section class="panel active">
+  <h2>Analytics / Stats</h2>
+  <div class="stats-grid">
+    <div class="card">
+      <h3>Most Popular Brew Methods</h3>
+      <div id="popular-methods"></div>
+    </div>
+    <div class="card">
+      <h3>Average Ratings by Bean Origin</h3>
+      <div id="ratings-by-origin"></div>
+    </div>
+    <div class="card">
+      <h3>Most Favourited Recipes</h3>
+      <ul id="most-favourited"></ul>
+    </div>
+  </div>
+</section>
+{% endblock %}
