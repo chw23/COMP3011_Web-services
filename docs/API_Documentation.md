@@ -5,6 +5,7 @@
 This document describes the Coffee API endpoints, request parameters, response formats,
 authentication process, and common error codes.
 
+- **Live base URL**: `https://chw23.pythonanywhere.com`
 - API base path: `/api/`
 - Interactive docs (CoreAPI): `/docs/`
 - Content type: `application/json`
@@ -316,7 +317,32 @@ Validation errors may also be field-based:
 
 ---
 
-## 7. Notes
+## 7. Deployment
+
+The API is hosted on **PythonAnywhere** at `https://chw23.pythonanywhere.com`.
+
+All example `curl` requests can be run against the live URL by replacing `http://127.0.0.1:8000` with `https://chw23.pythonanywhere.com`.
+
+**Example (live):**
+
+```bash
+curl -X POST https://chw23.pythonanywhere.com/api/auth/login/ \
+  -H "Content-Type: application/json" \
+  -d '{"username":"alice","password":"secret123"}'
+```
+
+### Production environment
+
+| Setting | Value |
+|---|---|
+| Platform | PythonAnywhere (free tier) |
+| Python version | 3.12 |
+| `DEBUG` | `False` |
+| Static files | Served by WhiteNoise |
+| Database | SQLite (`db.sqlite3`) |
+| Deploy branch | `deploy` (GitHub) |
+
+## 8. Notes
 
 - Current implementation uses token records stored in `user_tokens` table.
 - Interactive docs pull descriptions from endpoint/view docstrings.

@@ -137,6 +137,35 @@ Returns:
 - Favourite delete is limited to the favourite owner
 - `/api/auth/me/` and `/api/auth/logout/` require bearer token auth
 
+## Deployment (PythonAnywhere)
+
+The application is deployed at: **https://chw23.pythonanywhere.com**
+
+All API endpoints, frontend pages, and `/docs/` are accessible at that base URL.
+
+### Re-deploying after changes
+
+1. Push changes to the `deploy` branch on GitHub.
+2. In a PythonAnywhere Bash console:
+
+```bash
+cd ~/COMP3011_Web-services
+git pull origin deploy
+source venv/bin/activate
+pip install -r requirements.txt
+DJANGO_DEBUG=False python manage.py migrate
+DJANGO_DEBUG=False python manage.py collectstatic --noinput
+```
+
+3. Go to the **Web** tab and click **Reload**.
+
+### Production configuration notes
+
+- `DEBUG` is disabled in production (`DJANGO_DEBUG=False` env var).
+- Static files are served by [WhiteNoise](https://whitenoise.readthedocs.io/) via `STATIC_ROOT = BASE_DIR / 'staticfiles'`.
+- `.pythonanywhere.com` is included in `ALLOWED_HOSTS` automatically when `DEBUG=False`.
+- The secret key should be rotated via the `DJANGO_SECRET_KEY` environment variable for production use.
+
 ## Notes
 
 - Existing legacy plaintext password hashes are auto-upgraded to Django hashes on successful login.
